@@ -1,0 +1,14 @@
+version: 2
+jobs:
+  build:
+    machine: true
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm run build
+      - deploy:
+          name: If master, deploy to webserver
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              rsync -va --delete ./build/ ${WEBSERVER}:${WEBADDRESS}
+            fi
