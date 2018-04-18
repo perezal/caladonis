@@ -26,6 +26,16 @@ const workouts = (state = initialState, action) => {
         workouts: action.payload,
         isFetching: false
       }
+    case "SAVING_WORKOUT":
+      return {
+        ...state,
+        isSaving: true
+      }
+    case "SAVING_WORKOUT_DONE":
+      return {
+        ...state,
+        isSaving: false
+      }
     case "WORKOUTS_FETCH_FAILURE":
       return {
         ...state,

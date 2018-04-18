@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { workoutsActions } from '../actions/workouts.actions';
 import LoadingAnimation from '../components/LoadingAnimation';
 
-import { Button, Container, Accordion } from 'semantic-ui-react';
+import { Button, Container, Accordion, Dimmer, Loader } from 'semantic-ui-react';
 
 import Workout from './Workout.js';
 
@@ -26,11 +26,15 @@ class HomePage extends React.Component {
   }
 
   render() {
-    const { workouts, isFetching } = this.props;
+    const { workouts, isFetching, isSaving } = this.props;
     const workoutList = workouts ? workouts.map(workout => <Workout key={workout.id} {...workout} />) : "";
+    console.log(isSaving);
 
     return (
       <div className="home">
+        <Dimmer active={isSaving} page>
+          <Loader />
+        </Dimmer>
         <Container>
           <h2>Here are your workouts</h2>
           {isFetching &&
@@ -52,10 +56,11 @@ class HomePage extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { workouts, isFetching } = state.workouts;
+  const { workouts, isFetching, isSaving } = state.workouts;
   return {
     workouts,
-    isFetching
+    isFetching,
+    isSaving
   };
 }
 
