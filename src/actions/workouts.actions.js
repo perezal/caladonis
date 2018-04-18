@@ -3,7 +3,8 @@ import { workoutsService } from '../services/workouts.service';
 export const workoutsActions = {
   fetchWorkouts,
   createWorkout,
-  deleteWorkout
+  deleteWorkout,
+  saveWorkout
 };
 
 const requestWorkouts = () => ({
@@ -22,6 +23,7 @@ const workoutsFetchFailure = () => ({
 function fetchWorkouts() {
   return dispatch => {
     dispatch(requestWorkouts());
+
     workoutsService.getWorkouts()
       .then(
         data => dispatch(receiveWorkouts(data)),
@@ -30,6 +32,21 @@ function fetchWorkouts() {
           alert("Unable to fetch workout! " + error);
         }
       );
+  }
+}
+
+function saveWorkout(workoutData) {
+  return dispatch => {
+    workoutsService.saveWorkout(workoutData)
+      .then(
+        data => {
+          alert("Workout saved");
+          dispatch(fetchWorkouts());
+        },
+        error => {
+          alert("Workout not saved", error);
+        }
+      )
   }
 }
 

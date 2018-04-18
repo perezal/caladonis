@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { authActions } from "../actions/auth.actions";
 
-import { Grid, Form, Segment, Header } from 'semantic-ui-react';
+import { Grid, Form, Segment, Header, Message } from 'semantic-ui-react';
 
 class LoginPage extends Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class LoginPage extends Component {
 
   render() {
 
-    const { loggingIn } = this.props;
+    const { loggingIn, loginFailed } = this.props;
 
     return (
       <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
@@ -49,6 +49,10 @@ class LoginPage extends Component {
               <Form.Button loading={loggingIn} fluid size='large' color='orange' content='Login' />
             </Segment>
           </Form>
+          <Message warning content="If you're looking to try out the app, you can log in with the username 'guest' and password 'guestpass'" />
+          {loginFailed &&
+            <Message negative content="Login Failed" />
+          }
         </Grid.Column>
       </Grid>
     )
@@ -56,10 +60,11 @@ class LoginPage extends Component {
 }
 
 function mapStateToProps(state) {
-  const { loggedIn, loggingIn } = state.authentication;
+  const { loggedIn, loggingIn, loginFailed } = state.authentication;
   return {
     loggedIn,
-    loggingIn
+    loggingIn,
+    loginFailed
   };
 }
 

@@ -9,7 +9,7 @@ import './App.css';
 import Nav from './pages/Nav';
 import AccountPage from "./pages/AccountPage";
 import HomePage from "./HomePage/HomePage";
-import LoginPage from "./pages/LoginPage";
+import LoginPage from "./LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 
 class App extends Component {

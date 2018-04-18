@@ -36,12 +36,7 @@ class Workout extends React.Component {
       account,
       exercises,
     });
-    console.log(data);
-    workoutsService.saveWorkout(data)
-    .then(
-      response => console.log(response),
-      error => console.log(error.json())
-    );
+    this.props.dispatch(workoutsActions.saveWorkout(data));
   }
 
   createExercise() {
