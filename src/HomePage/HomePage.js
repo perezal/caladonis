@@ -46,7 +46,7 @@ class HomePage extends React.Component {
               <Button onClick={this.createWorkout.bind(this)} positive>New Workout</Button>
             </div>
           }
-          <Accordion>
+          <Accordion styled fluid>
             {workoutList}
           </Accordion>
         </Container>

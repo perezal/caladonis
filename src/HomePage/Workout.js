@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import uniqueId from 'lodash/uniqueId';
 import moment from 'moment';
 
-import { Form, Accordion } from 'semantic-ui-react';
+import { Form, Accordion, Icon } from 'semantic-ui-react';
 
 import { workoutsActions } from '../actions/workouts.actions';
 
@@ -22,6 +22,7 @@ class Workout extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.deleteWorkout = this.deleteWorkout.bind(this);
+    this.toggleAccordion = this.toggleAccordion.bind(this);
   }
 
   handleSave(e) {
@@ -78,8 +79,14 @@ class Workout extends React.Component {
     this.props.dispatch(workoutsActions.deleteWorkout(id));
   }
 
+  toggleAccordion() {
+    this.setState({
+      accordionOpen: !this.state.accordionOpen
+    })
+  }
+
   render() {
-    const { exercises, date, notes } = this.state;
+    const { exercises, date, notes, accordionOpen } = this.state;
     const exerciseList = exercises.map(exercise => (
       <Exercise
         updateExercise={this.updateExercise.bind(this)}
@@ -91,8 +98,11 @@ class Workout extends React.Component {
 
     return (
       <Form className="workout">
-        <Accordion.Title active={true}><h2>Workout on {moment(date).format('M/D/Y')}</h2></Accordion.Title>
-        <Accordion.Content active={true}>
+        <Accordion.Title onClick={this.toggleAccordion}>
+          <Icon name='dropdown' />
+          Workout on {moment(date).format('M/D/Y')}
+        </Accordion.Title>
+        <Accordion.Content active={accordionOpen}>
           <Form.Group>
             <Form.Button onClick={this.handleSave.bind(this)} positive content="Save Workout" />
             <Form.Button onClick={this.deleteWorkout.bind(this)} negative content="Delete Workout" />
