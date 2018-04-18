@@ -5,7 +5,7 @@ export const authService = {
 
 function login(username, password) {
 
-  const source = 'http://localhost:8000/login/';
+  const source = 'https://api.caladonis.com/login/';
 
   const requestOptions = {
     method: 'POST',

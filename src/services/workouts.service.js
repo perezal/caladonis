@@ -5,7 +5,7 @@ export const workoutsService = {
   createWorkout
 };
 
-const baseUrl = "http://127.0.0.1:8000/workouts/";
+const baseUrl = "https://api.caladonis.com/workouts/";
 
 function getWorkouts() {
   // send token in header
