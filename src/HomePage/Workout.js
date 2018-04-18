@@ -8,8 +8,6 @@ import moment from 'moment';
 import { Form, Accordion } from 'semantic-ui-react';
 
 import { workoutsActions } from '../actions/workouts.actions';
-import { workoutsService } from '../services/workouts.service';
-
 
 class Workout extends React.Component {
   constructor(props) {
