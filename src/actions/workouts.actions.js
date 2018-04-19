@@ -1,4 +1,5 @@
 import { workoutsService } from '../services/workouts.service';
+import { push } from 'react-router-redux';
 
 export const workoutsActions = {
   fetchWorkouts,
@@ -37,7 +38,12 @@ function fetchWorkouts() {
         data => dispatch(receiveWorkouts(data)),
         error => {
           dispatch(workoutsFetchFailure());
-          alert("Unable to fetch workout! " + error);
+          if (error === 401) {
+            alert("You must log in");
+            dispatch(push("/login"));
+          } else {
+            alert("Unable to find workouts. Please try again later");
+          }
         }
       );
   }

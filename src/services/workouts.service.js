@@ -20,7 +20,7 @@ function getWorkouts() {
     .then(function(response) {
       console.log(response);
       if (!response.ok) {
-        return Promise.reject(response.statusText);
+        return Promise.reject(response.status);
       }
       return response.json();
     });
