@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Form, Segment } from 'semantic-ui-react';
+import { Button, Input, Segment } from 'semantic-ui-react';
 
 export default class Set extends React.PureComponent {
   constructor() {
@@ -31,14 +31,20 @@ export default class Set extends React.PureComponent {
   }
 
   render() {
-
+    // work on segment: basic & compact vs segment.group horizontal
     const { reps, weight } = this.props;
     return (
-      <Segment className="set">
-        <Form.Input label='Reps' size="tiny" onChange={this.handleChange} name="reps" placeholder="reps" value={reps} />
-        <Form.Input label='Weight' size="tiny" onChange={this.handleChange} name="weight" placeholder="weight" value={weight} />
-        <Form.Button fluid basic onClick={this.handleDeleteSet} negative content="Delete" icon="delete" />
-      </Segment>
+      <Segment.Group horizontal className="set">
+        <Segment basic>
+        <Input label='Reps' size="tiny" onChange={this.handleChange} name="reps" placeholder="reps" value={reps} />
+        </Segment>
+        <Segment basic>
+        <Input label='Weight' size="tiny" onChange={this.handleChange} name="weight" placeholder="weight" value={weight} />
+        </Segment>
+        <Segment compact>
+          <Button basic onClick={this.handleDeleteSet} negative content="Delete" icon="delete" />
+        </Segment>
+      </Segment.Group>
     )
   }
 }

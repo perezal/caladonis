@@ -3,7 +3,7 @@ import Set from './Set';
 
 import uniqueId from 'lodash/uniqueId';
 
-import { Form, Segment } from 'semantic-ui-react';
+import { Input, Segment, Button } from 'semantic-ui-react';
 
 export default class Exercise extends React.Component {
   constructor() {
@@ -72,14 +72,15 @@ export default class Exercise extends React.Component {
     const setList = sets ? sets.map(set => <Set updateSet={this.updateSet} deleteSet={this.deleteSet} key={set.id} {...set} />) : "";
 
     return (
-      <Segment.Group horizontal raised className="exercise">
+      <Segment.Group raised className="exercise">
           <Segment>
-            <Form.Input name="name" onChange={this.handleChange} value={name} />
-            <Form.Button onClick={this.handleDeleteExercise} color="red" content="Exercise" icon="delete" />
+            <Input action={
+              <Button onClick={this.handleDeleteExercise} color="red" content="Exercise" icon="delete" />
+            } fluid name="name" onChange={this.handleChange} value={name} />
           </Segment>
           {setList}
           <Segment>
-            <Form.Button onClick={this.createSet} color="blue" content="Set" icon="add" />
+            <Button fluid onClick={this.createSet} color="blue" content="Set" icon="add" />
           </Segment>
       </Segment.Group>
     )

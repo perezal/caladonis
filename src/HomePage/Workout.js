@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import uniqueId from 'lodash/uniqueId';
 import moment from 'moment';
 
-import { Form, Accordion, Icon } from 'semantic-ui-react';
+import { Form, Accordion, Icon, TextArea } from 'semantic-ui-react';
 
 import { workoutsActions } from '../actions/workouts.actions';
 
@@ -110,7 +110,7 @@ class Workout extends React.Component {
           {exercises &&
             exerciseList}
           <Form.Button onClick={this.createExercise.bind(this)} color="blue" content="Exercise" icon="add" />
-          <Form.TextArea autoHeight name="notes" onChange={this.handleChange} value={notes} />
+          <TextArea autoHeight style={{ minHeight: '100px' }} name="notes" onChange={this.handleChange} value={notes} />
         </Accordion.Content>
       </Form>
     )
