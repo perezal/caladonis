@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import uniqueId from 'lodash/uniqueId';
 import moment from 'moment';
 
-import { Form, Accordion, Icon, TextArea } from 'semantic-ui-react';
+import { Label, Button, Accordion, Icon, TextArea, Segment } from 'semantic-ui-react';
 
 import { workoutsActions } from '../actions/workouts.actions';
 
@@ -97,22 +97,32 @@ class Workout extends React.Component {
       ));
 
     return (
-      <Form className="workout">
-        <Accordion.Title onClick={this.toggleAccordion}>
+      <div className="workout">
+        <Accordion.Title active={accordionOpen} onClick={this.toggleAccordion}>
           <Icon name='dropdown' />
           Workout on {moment(date).format('M/D/Y')}
         </Accordion.Title>
         <Accordion.Content active={accordionOpen}>
-          <Form.Group>
-            <Form.Button onClick={this.handleSave.bind(this)} positive content="Save Workout" />
-            <Form.Button onClick={this.deleteWorkout.bind(this)} negative content="Delete Workout" />
-          </Form.Group>
-          {exercises &&
-            exerciseList}
-          <Form.Button onClick={this.createExercise.bind(this)} color="blue" content="Exercise" icon="add" />
-          <TextArea autoHeight style={{ minHeight: '100px' }} name="notes" onChange={this.handleChange} value={notes} />
+          <Segment.Group>
+            {exercises &&
+              exerciseList}
+            <Segment>
+              <Button fluid onClick={this.createExercise.bind(this)} color="orange" content="Exercise" icon="add" />
+            </Segment>
+            <Segment>
+              <Button.Group fluid>
+                <Button onClick={this.deleteWorkout.bind(this)} negative content="Delete Workout" />
+                <Button.Or style={{ borderLeft: '0.15em solid transparent', borderRight: '0.15em solid transparent' }} />
+                <Button onClick={this.handleSave.bind(this)} positive content="Save Workout" />
+              </Button.Group>
+            </Segment>
+            <Segment>
+              <Label content='Notes'/>
+              <TextArea autoHeight style={{ minHeight: '100px', width: '100%' }} name="notes" onChange={this.handleChange} value={notes} />
+            </Segment>
+          </Segment.Group>
         </Accordion.Content>
-      </Form>
+      </div>
     )
   }
 }

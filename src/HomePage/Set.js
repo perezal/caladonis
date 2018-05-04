@@ -36,10 +36,10 @@ export default class Set extends React.PureComponent {
     return (
       <Segment.Group horizontal className="set">
         <Segment basic>
-        <Input label='Reps' size="tiny" onChange={this.handleChange} name="reps" placeholder="reps" value={reps} />
+          <Input label='Reps' size="tiny" onChange={this.handleChange} name="reps" placeholder="reps" value={reps} />
         </Segment>
         <Segment basic>
-        <Input label='Weight' size="tiny" onChange={this.handleChange} name="weight" placeholder="weight" value={weight} />
+          <Input label='Weight' size="tiny" onChange={this.handleChange} name="weight" placeholder="weight" value={weight} />
         </Segment>
         <Segment compact>
           <Button basic onClick={this.handleDeleteSet} negative content="Delete" icon="delete" />
