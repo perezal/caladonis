@@ -90,9 +90,7 @@ function createWorkout() {
           alert("Workout Created");
           dispatch(fetchWorkouts());
         },
-        error => {
-          alert("Error!", error);
-        }
+        error => alert("Error!", error)
       );
   }
 }

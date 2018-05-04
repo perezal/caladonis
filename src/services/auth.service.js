@@ -3,9 +3,11 @@ export const authService = {
   logout,
 }
 
+const base_url = process.env.NODE_ENV === 'production' ? 'https://api.caladonis.com/' : 'http://localhost:8000/';
+
 function login(username, password) {
 
-  const source = 'https://api.caladonis.com/login/';
+  const source = base_url + 'login/';
 
   const requestOptions = {
     method: 'POST',

@@ -5,14 +5,15 @@ export const workoutsService = {
   createWorkout
 };
 
-const baseUrl = "https://api.caladonis.com/workouts/";
+const base_url = process.env.NODE_ENV === 'production' ? 'https://api.caladonis.com/workouts/' : 'http://localhost:8000/workouts/';
+
 
 function getWorkouts() {
   // send token in header
   const user = JSON.parse(localStorage.getItem('user'));
   const token = user ? user.token : "";
 
-  return fetch(baseUrl, {
+  return fetch(base_url, {
     headers: new Headers({
       'Authorization': 'Token ' + token,
     })
@@ -28,7 +29,7 @@ function getWorkouts() {
 
 function saveWorkout(data) {
 
-  const url = baseUrl + data.id + "/";
+  const url = base_url + data.id + "/";
   // send token in header
   const user = JSON.parse(localStorage.getItem('user'));
   const token = user ? user.token : "";
@@ -53,7 +54,7 @@ function saveWorkout(data) {
 }
 
 function createWorkout() {
-  const url = baseUrl + "new/";
+  const url = base_url + "new/";
   // send token in header
   const user = JSON.parse(localStorage.getItem('user'));
   const token = user ? user.token : "";
@@ -77,7 +78,7 @@ function createWorkout() {
 }
 
 function deleteWorkout(workoutId) {
-  const url = baseUrl + workoutId + "/";
+  const url = base_url + workoutId + "/";
   // send token in header
   const user = JSON.parse(localStorage.getItem('user'));
   const token = user ? user.token : "";
@@ -96,6 +97,6 @@ function deleteWorkout(workoutId) {
       if (!response.ok) {
         return Promise.reject(response);
       }
-      return response.json();
+      return; // no response json to return
     });
 }
