@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { workoutsActions } from '../actions/workouts.actions';
-import LoadingAnimation from '../components/LoadingAnimation';
 
-import { Button, Container, Accordion, Dimmer, Loader, Segment } from 'semantic-ui-react';
+import { Button, Container, Accordion, Dimmer, Loader, Segment, Header, Icon } from 'semantic-ui-react';
 
 import Workout from './Workout.js';
 
@@ -27,7 +26,7 @@ class HomePage extends React.Component {
 
   render() {
     const { workouts, isFetching, isSaving } = this.props;
-    const workoutList = workouts ? workouts.map(workout => <Workout key={workout.id} {...workout} />) : "";
+    const workoutList = workouts ? workouts.reverse().map(workout => <Workout key={workout.id} {...workout} />) : "";
 
     return (
       <div className="home">
@@ -35,16 +34,15 @@ class HomePage extends React.Component {
           <Loader />
         </Dimmer>
         <Container>
-          <h2>Here are your workouts</h2>
-          {isFetching &&
-            <LoadingAnimation />
-          }
-          {!isFetching &&
-            <Segment>
-              <Button onClick={this.getWorkouts.bind(this)} positive icon="repeat" content="Reload Workouts" />
-              <Button onClick={this.createWorkout.bind(this)} positive icon="add" content="New Workout" />
+          <Header as='h2' icon textAlign='center'>
+            <Icon name='heartbeat' />
+            <Header.Content>Workouts</Header.Content>
+          </Header>
+
+            <Segment basic textAlign='center'>
+              <Button onClick={this.getWorkouts.bind(this)} positive icon="repeat" loading={isFetching} disabled={isFetching} content="Load Workouts" />
+              <Button onClick={this.createWorkout.bind(this)} positive icon="add" disabled={isFetching} content="New Workout" />
             </Segment>
-          }
           <Accordion styled fluid>
             {workoutList}
           </Accordion>

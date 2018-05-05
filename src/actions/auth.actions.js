@@ -30,7 +30,6 @@ function login(username, password) {
         },
         error => {
           dispatch(loginFailure());
-          alert(error);
         }
       );
   }

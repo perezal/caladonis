@@ -43,7 +43,7 @@ class Workout extends React.Component {
     console.log(id);
     const exercise = {
       id: id,
-      name: 'New Exercise',
+      name: '',
       sets: []
     };
     const newExercises = this.state.exercises;
@@ -117,8 +117,8 @@ class Workout extends React.Component {
               </Button.Group>
             </Segment>
             <Segment>
-              <Label content='Notes'/>
-              <TextArea autoHeight style={{ minHeight: '100px', width: '100%' }} name="notes" onChange={this.handleChange} value={notes} />
+              <Label ribbon size='large' color='violet' content='Workout Notes'/>
+              <TextArea autoHeight style={{ minHeight: '100px', width: '100%', padding: '10px' }} name="notes" onChange={this.handleChange} value={notes} />
             </Segment>
           </Segment.Group>
         </Accordion.Content>

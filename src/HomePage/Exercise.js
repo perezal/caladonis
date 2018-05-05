@@ -3,7 +3,7 @@ import Set from './Set';
 
 import uniqueId from 'lodash/uniqueId';
 
-import { Input, Segment, Button } from 'semantic-ui-react';
+import { Input, Segment, Button, Grid } from 'semantic-ui-react';
 
 export default class Exercise extends React.Component {
   constructor() {
@@ -69,20 +69,30 @@ export default class Exercise extends React.Component {
 
   render() {
     const { sets, name } = this.props;
-    const setList = sets ? sets.map(set => <Set updateSet={this.updateSet} deleteSet={this.deleteSet} key={set.id} {...set} />) : "";
+    const setList = sets ? sets.map((set, index) => <Set updateSet={this.updateSet} deleteSet={this.deleteSet} key={set.id} setNumber={index+1} {...set} />) : "";
 
     return (
-      <Segment.Group raised className="exercise">
-          <Segment>
-            <Input action={
-              <Button onClick={this.handleDeleteExercise} color="red" content="Exercise" icon="delete" />
-            } fluid name="name" onChange={this.handleChange} value={name} />
-          </Segment>
-          {setList}
-          <Segment>
-            <Button fluid onClick={this.createSet} color="blue" content="Set" icon="add" />
-          </Segment>
-      </Segment.Group>
+        <Segment>
+            <Input
+              action={<Button onClick={this.handleDeleteExercise} color="red" content="Exercise" icon="delete" basic />}
+              fluid
+              name="name"
+              onChange={this.handleChange}
+              value={name}
+              size='large'
+              placeholder='Exercise Name'
+            />
+            <Segment basic>
+              <Grid relaxed columns={2} textAlign="center" verticalAlign="middle" className="set">
+                {setList}
+                <Grid.Row>
+                  <Grid.Column width="16">
+                    <Button fluid onClick={this.createSet} color="blue" content="Set" icon="add" />
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
+            </Segment>
+        </Segment>
     )
   }
 }

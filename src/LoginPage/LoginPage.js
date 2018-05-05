@@ -49,10 +49,8 @@ class LoginPage extends Component {
               <Form.Button loading={loggingIn} fluid size='large' color='orange' content='Login' />
             </Segment>
           </Form>
-          <Message warning content="If you're looking to try out the app, you can log in with the username 'guest' and password 'guestpass'" />
-          {loginFailed &&
-            <Message negative content="Login Failed" />
-          }
+          <Message warning content="If you're looking to try out the production app, you can log in with the username 'guest' and password 'guestpass'" />
+          <Message hidden={!loginFailed} negative content="Login Failed" />
         </Grid.Column>
       </Grid>
     )
