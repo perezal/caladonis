@@ -22,7 +22,7 @@ class AccountPage extends React.Component {
 
     return (
       <div>
-        <h1>I am the account page!</h1>
+        <h1>Your Caladonis Account</h1>
         <Button onClick={this.handleLogout} negative content="Log Out" />
       </div>
     )

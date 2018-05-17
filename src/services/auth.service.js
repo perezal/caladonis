@@ -1,13 +1,14 @@
 export const authService = {
   login,
   logout,
+  signup
 }
 
-const base_url = process.env.NODE_ENV === 'production' ? 'https://api.caladonis.com/' : 'http://localhost:8000/';
+const baseUrl = process.env.NODE_ENV === 'production' ? 'https://api.caladonis.com/' : 'http://localhost:8000/';
 
 function login(username, password) {
 
-  const source = base_url + 'login/';
+  const source = baseUrl + 'login/';
 
   const requestOptions = {
     method: 'POST',
@@ -24,7 +25,6 @@ function login(username, password) {
       return response.json();
     })
     .then(user => {
-      console.log(user);
       if (user.token) {
         localStorage.setItem('user', JSON.stringify(user));
         localStorage.setItem('username', username);
@@ -34,8 +34,33 @@ function login(username, password) {
 }
 
 function logout() {
-  console.log("LOGOUT");
   // remove user from local storage to log user out
   localStorage.removeItem('user');
   localStorage.removeItem('username');
+}
+
+function signup(userData) {
+  const source = baseUrl + 'accounts/new/';
+  console.log(userData);
+
+  const { username, password, email } = userData;
+
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, password, email }),
+  }
+
+// fetch is wrapped in a Promise to reject on non-ok responses
+  return new Promise((resolve, reject) => {
+    let should_reject = false;
+    fetch(source, requestOptions)
+    .then(response => {
+      should_reject = !response.ok;
+      return response.json();
+    })
+    .then(result => {
+      should_reject ? reject(result) : resolve(result);
+    })
+  });
 }

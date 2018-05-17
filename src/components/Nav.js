@@ -12,7 +12,6 @@ class Nav extends React.Component {
     const { loggedIn } = this.props;
     const username = localStorage.getItem('username');
     const loggedInAs = loggedIn ? username : "Login";
-    // <Button positive><Link to="/login">Log In</Link></Button>;
 
     return (
       <Menu>
@@ -23,10 +22,10 @@ class Nav extends React.Component {
           <Link to="/login">Login</Link>
         </Menu.Item>
         <Menu.Item>
-          <Link to="/register">Register</Link>
+          <Link to="/signup">Signup</Link>
         </Menu.Item>
         <Menu.Item position="right">
-          <Label as={Link} to={loggedIn ? "/account" : "/login"} color='blue' size='big' icon>
+          <Label as={Link} to={loggedIn ? "/account" : "/login"} color='blue' size='large'>
             <Icon name='user' />
             {loggedIn && 'Logged in as'}
             <Label.Detail>{loggedInAs}</Label.Detail>

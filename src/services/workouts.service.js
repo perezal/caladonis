@@ -5,7 +5,7 @@ export const workoutsService = {
   createWorkout
 };
 
-const base_url = process.env.NODE_ENV === 'production' ? 'https://api.caladonis.com/workouts/' : 'http://localhost:8000/workouts/';
+const baseUrl = process.env.NODE_ENV === 'production' ? 'https://api.caladonis.com/workouts/' : 'http://localhost:8000/workouts/';
 
 
 function getWorkouts() {
@@ -13,13 +13,12 @@ function getWorkouts() {
   const user = JSON.parse(localStorage.getItem('user'));
   const token = user ? user.token : "";
 
-  return fetch(base_url, {
+  return fetch(baseUrl, {
     headers: new Headers({
       'Authorization': 'Token ' + token,
     })
   })
     .then(function(response) {
-      console.log(response);
       if (!response.ok) {
         return Promise.reject(response.status);
       }
@@ -29,7 +28,7 @@ function getWorkouts() {
 
 function saveWorkout(data) {
 
-  const url = base_url + data.id + "/";
+  const url = baseUrl + data.id + "/";
   // send token in header
   const user = JSON.parse(localStorage.getItem('user'));
   const token = user ? user.token : "";
@@ -45,7 +44,6 @@ function saveWorkout(data) {
 
   return fetch(url, requestOptions)
     .then(function(response) {
-      console.log(response);
       if (!response.ok) {
         return Promise.reject(response);
       }
@@ -54,7 +52,7 @@ function saveWorkout(data) {
 }
 
 function createWorkout() {
-  const url = base_url + "new/";
+  const url = baseUrl + "new/";
   // send token in header
   const user = JSON.parse(localStorage.getItem('user'));
   const token = user ? user.token : "";
@@ -69,7 +67,6 @@ function createWorkout() {
 
   return fetch(url, requestOptions)
     .then(function(response) {
-      console.log(response);
       if (!response.ok) {
         return Promise.reject(response);
       }
@@ -78,7 +75,7 @@ function createWorkout() {
 }
 
 function deleteWorkout(workoutId) {
-  const url = base_url + workoutId + "/";
+  const url = baseUrl + workoutId + "/";
   // send token in header
   const user = JSON.parse(localStorage.getItem('user'));
   const token = user ? user.token : "";
@@ -93,7 +90,6 @@ function deleteWorkout(workoutId) {
 
   return fetch(url, requestOptions)
     .then(function(response) {
-      console.log(response);
       if (!response.ok) {
         return Promise.reject(response);
       }

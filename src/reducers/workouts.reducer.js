@@ -2,16 +2,6 @@ const initialState = {
   workouts: [],
 };
 
-// function addExerciseTo(workout_id, state) {
-//   state.workouts.forEach( workout => {
-//     if (workout.id === workout_id) {
-//       workout.exercises.push({ id:"placeholderid", name:"new exercise", sets:[] });
-//       console.log(state.workouts);
-//     }
-//   });
-//   return state.workouts;
-// }
-
 const workouts = (state = initialState, action) => {
   switch (action.type) {
     case "REQUEST_WORKOUTS":
@@ -40,6 +30,10 @@ const workouts = (state = initialState, action) => {
       return {
         ...state,
         isFetching: false
+      }
+    case "LOGIN_SUCCESS":
+      return {
+        ...initialState
       }
     case "LOGOUT":
       return {

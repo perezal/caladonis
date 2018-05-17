@@ -18,6 +18,19 @@ export function authentication(state=initialState, action) {
       };
     case "LOGOUT":
       return {};
+    case "SIGNUP_REQUEST":
+      return {
+        signingUp: true
+      };
+    case "SIGNUP_SUCCESS":
+      return {
+        signingUp: false
+      };
+    case "SIGNUP_FAILURE":
+      return {
+        signingUp: false,
+        signupErrors: action.errors
+      }
     default:
       return state;
   }

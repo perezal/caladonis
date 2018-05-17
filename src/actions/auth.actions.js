@@ -4,6 +4,7 @@ import { push } from 'react-router-redux';
 export const authActions = {
   login,
   logout,
+  signup
 }
 
 const loginRequest = () => ({
@@ -45,5 +46,32 @@ function logout() {
     dispatch(logoutSuccess());
     dispatch(push('/login'));
   }
+}
 
+const signupRequest = () => ({
+  type: "SIGNUP_REQUEST"
+})
+
+const signupSuccess = () => ({
+  type: "SIGNUP_SUCCESS",
+})
+
+const signupFailure = (errors) => ({
+  type: "SIGNUP_FAILURE",
+  errors: errors
+})
+
+function signup(userData) {
+  return dispatch => {
+    dispatch(signupRequest());
+    authService.signup(userData)
+      .then(user => {
+          dispatch(login(userData.username, userData.password))
+          dispatch(signupSuccess())
+        },
+        errors => {
+          dispatch(signupFailure(errors))
+        }
+      )
+  }
 }

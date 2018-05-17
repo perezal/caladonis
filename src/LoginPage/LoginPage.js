@@ -1,11 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { authActions } from "../actions/auth.actions";
 
-import { Grid, Form, Segment, Header, Message } from 'semantic-ui-react';
+import { Grid, Form, Header, Message, Button, Icon } from 'semantic-ui-react';
 
-class LoginPage extends Component {
+class LoginPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,10 +24,7 @@ class LoginPage extends Component {
     e.preventDefault();
     const { username, password } = this.state;
 
-    new Promise((resolve, reject) => {
-      this.props.dispatch(authActions.login(username, password));
-      resolve();
-    });
+    this.props.dispatch(authActions.login(username, password));
   }
 
   handleChange(e) {
@@ -42,14 +40,15 @@ class LoginPage extends Component {
       <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
         <Grid.Column style={{ maxWidth: 450 }}>
           <Header as='h1' color='orange'>I am the login page!</Header>
-          <Form size='large' onSubmit={this.handleSubmit}>
-            <Segment stacked>
-              <Form.Input fluid icon='user' iconPosition='left' name='username' placeholder="Username" value={this.state.username} onChange={this.handleChange} />
-              <Form.Input fluid icon='lock' iconPosition='left' type='password' name='password' placeholder="Password" value={this.state.password} onChange={this.handleChange} />
-              <Form.Button loading={loggingIn} fluid size='large' color='orange' content='Login' />
-            </Segment>
+          <Form className='attached fluid segment' loading={loggingIn} size='large' onSubmit={this.handleSubmit}>
+            <Form.Input fluid icon='user' iconPosition='left' name='username' placeholder="Username" value={this.state.username} onChange={this.handleChange} />
+            <Form.Input fluid icon='lock' iconPosition='left' type='password' name='password' placeholder="Password" value={this.state.password} onChange={this.handleChange} />
+            <Button fluid size='large' color='orange' content='Login' />
           </Form>
-          <Message warning content="If you're looking to try out the production app, you can log in with the username 'guest' and password 'guestpass'" />
+          <Message attached='bottom'>
+            <Icon name='help' />
+            Don't have an account?&nbsp;<Link to='/signup'>Sign up here</Link>&nbsp;instead.
+          </Message>
           <Message hidden={!loginFailed} negative content="Login Failed" />
         </Grid.Column>
       </Grid>
