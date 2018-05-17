@@ -21,14 +21,19 @@ class SignupPage extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const { username, email, password } = this.state;
-    const userData = {
-      username: username,
-      password: password,
-      email: email
+    const { username, email, password, passwordRetype } = this.state;
+    if (password === passwordRetype) {
+      const userData = {
+        username: username,
+        password: password,
+        email: email
+      }
+      this.props.dispatch(authActions.signup(userData));
+    } else {
+      this.props.dispatch(authActions.signupFailure({
+        password: ["Both passwords must match."]
+      }))
     }
-
-    this.props.dispatch(authActions.signup(userData));
   }
 
   handleChange(e) {

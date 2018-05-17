@@ -1,12 +1,6 @@
 import { authService } from '../services/auth.service';
 import { push } from 'react-router-redux';
 
-export const authActions = {
-  login,
-  logout,
-  signup
-}
-
 const loginRequest = () => ({
   type: "LOGIN_REQUEST"
 });
@@ -74,4 +68,11 @@ function signup(userData) {
         }
       )
   }
+}
+
+export const authActions = {
+  login,
+  logout,
+  signup,
+  signupFailure
 }
