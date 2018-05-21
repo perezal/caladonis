@@ -1,43 +1,45 @@
+import { actionTypes } from '../constants/workouts.actions';
+
 const initialState = {
   workouts: [],
 };
 
 const workouts = (state = initialState, action) => {
   switch (action.type) {
-    case "REQUEST_WORKOUTS":
+    case actionTypes.REQUEST_WORKOUTS:
       return {
         ...state,
         workouts: [],
         isFetching: true,
       };
-    case "RECEIVE_WORKOUTS":
+    case actionTypes.RECEIVE_WORKOUTS:
       return {
         ...state,
         workouts: action.payload,
-        isFetching: false
+        isFetching: false,
       }
-    case "SAVING_WORKOUT":
+    case actionTypes.SAVING_WORKOUT:
       return {
         ...state,
-        isSaving: true
+        isSaving: true,
       }
-    case "SAVING_WORKOUT_DONE":
+    case actionTypes.SAVING_WORKOUT_DONE:
       return {
         ...state,
-        isSaving: false
+        isSaving: false,
       }
-    case "WORKOUTS_FETCH_FAILURE":
+    case actionTypes.WORKOUTS_FETCH_FAILURE:
       return {
         ...state,
-        isFetching: false
+        isFetching: false,
       }
     case "LOGIN_SUCCESS":
       return {
-        ...initialState
+        ...initialState,
       }
-    case "LOGOUT":
+    case "LOGOUT_SUCCESS":
       return {
-        ...initialState
+        ...initialState,
       }
     default:
       return state;

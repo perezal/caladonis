@@ -1,35 +1,37 @@
+import { actionTypes } from '../constants/auth.actions';
+
 let user = JSON.parse(localStorage.getItem('user'));
 const initialState = user ? { loggedIn: true, user } : {};
 
 export function authentication(state=initialState, action) {
   switch (action.type) {
-    case "LOGIN_REQUEST":
+    case actionTypes.LOGIN_REQUEST:
       return {
         loggingIn: true,
       };
-    case "LOGIN_SUCCESS":
+    case actionTypes.LOGIN_SUCCESS:
       return {
         loggedIn: true,
-        user: action.user
+        user: action.user,
       };
-    case "LOGIN_FAILURE":
+    case actionTypes.LOGIN_FAILURE:
       return {
-        loginFailed: true
+        loginFailed: true,
       };
-    case "LOGOUT":
+    case actionTypes.LOGOUT_SUCCESS:
       return {};
-    case "SIGNUP_REQUEST":
+    case actionTypes.SIGNUP_REQUEST:
       return {
-        signingUp: true
+        signingUp: true,
       };
-    case "SIGNUP_SUCCESS":
-      return {
-        signingUp: false
-      };
-    case "SIGNUP_FAILURE":
+    case actionTypes.SIGNUP_SUCCESS:
       return {
         signingUp: false,
-        signupErrors: action.errors
+      };
+    case actionTypes.SIGNUP_FAILURE:
+      return {
+        signingUp: false,
+        signupErrors: action.errors,
       }
     default:
       return state;

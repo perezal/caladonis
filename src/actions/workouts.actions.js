@@ -1,32 +1,26 @@
 import { workoutsService } from '../services/workouts.service';
 import { push } from 'react-router-redux';
-
-export const workoutsActions = {
-  fetchWorkouts,
-  createWorkout,
-  deleteWorkout,
-  saveWorkout
-};
+import { actionTypes } from '../constants/workouts.actions';
 
 const requestWorkouts = () => ({
-  type: "REQUEST_WORKOUTS"
+  type: actionTypes.REQUEST_WORKOUTS
 });
 
 const receiveWorkouts = (data) => ({
-  type: "RECEIVE_WORKOUTS",
+  type: actionTypes.RECEIVE_WORKOUTS,
   payload: data,
 });
 
 const savingWorkout = () => ({
-  type: "SAVING_WORKOUT"
+  type: actionTypes.SAVING_WORKOUT
 });
 
 const savingWorkoutDone = () => ({
-  type:"SAVING_WORKOUT_DONE"
+  type: actionTypes.SAVING_WORKOUT_DONE
 })
 
 const workoutsFetchFailure = () => ({
-  type: "WORKOUTS_FETCH_FAILURE"
+  type: actionTypes.WORKOUTS_FETCH_FAILURE
 })
 
 function fetchWorkouts() {
@@ -94,3 +88,10 @@ function createWorkout() {
       );
   }
 }
+
+export const workoutsActions = {
+  fetchWorkouts,
+  createWorkout,
+  deleteWorkout,
+  saveWorkout,
+};

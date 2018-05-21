@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { Route } from "react-router-dom";
 import { history } from "./helpers/history";
+import { Provider } from 'react-redux';
+import { store } from "./helpers/store";
 import { ConnectedRouter } from 'react-router-redux';
 
 import './App.css';
@@ -12,11 +14,11 @@ import HomePage from "./HomePage/HomePage";
 import LoginPage from "./LoginPage/LoginPage";
 import SignupPage from "./SignupPage/SignupPage";
 
-class App extends Component {
+class App extends React.Component {
   render() {
 
     return (
-      <div className="App">
+      <Provider store={store}>
         <ConnectedRouter history={history}>
           <main>
             <Nav />
@@ -26,7 +28,7 @@ class App extends Component {
             <Route path="/signup" component={SignupPage} />
           </main>
         </ConnectedRouter>
-      </div>
+      </Provider>
     );
   }
 }

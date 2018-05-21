@@ -1,17 +1,18 @@
 import { authService } from '../services/auth.service';
 import { push } from 'react-router-redux';
+import { actionTypes } from '../constants/auth.actions';
 
 const loginRequest = () => ({
-  type: "LOGIN_REQUEST"
+  type: actionTypes.LOGIN_REQUEST,
 });
 
 const loginSuccess = (user) => ({
-  type: "LOGIN_SUCCESS",
+  type: actionTypes.LOGIN_SUCCESS,
   user
 });
 
 const loginFailure = () => ({
-  type: "LOGIN_FAILURE"
+  type: actionTypes.LOGIN_FAILURE,
 });
 
 function login(username, password) {
@@ -31,7 +32,7 @@ function login(username, password) {
 }
 
 const logoutSuccess = () => ({
-  type: "LOGOUT"
+  type: actionTypes.LOGOUT_SUCCESS
 });
 
 function logout() {
@@ -43,15 +44,15 @@ function logout() {
 }
 
 const signupRequest = () => ({
-  type: "SIGNUP_REQUEST"
+  type: actionTypes.SIGNUP_REQUEST
 })
 
 const signupSuccess = () => ({
-  type: "SIGNUP_SUCCESS",
+  type: actionTypes.SIGNUP_SUCCESS,
 })
 
 const signupFailure = (errors) => ({
-  type: "SIGNUP_FAILURE",
+  type: actionTypes.SIGNUP_FAILURE,
   errors: errors
 })
 
@@ -74,5 +75,5 @@ export const authActions = {
   login,
   logout,
   signup,
-  signupFailure
+  signupFailure,
 }
