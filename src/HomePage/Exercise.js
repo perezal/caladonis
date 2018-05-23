@@ -83,7 +83,7 @@ export default class Exercise extends React.Component {
               placeholder='Exercise Name'
             />
             <Segment basic>
-              <Grid relaxed columns={2} textAlign="center" verticalAlign="middle" className="set">
+              <Grid divided={'vertically'} columns={4} stackable textAlign="center" verticalAlign="middle" className="set">
                 {setList}
                 <Grid.Row>
                   <Grid.Column width="16">

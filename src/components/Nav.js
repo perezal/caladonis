@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Menu, Label, Icon } from 'semantic-ui-react';
+import { Menu, Button } from 'semantic-ui-react';
 
 import { connect } from 'react-redux';
 
@@ -19,17 +19,18 @@ class Nav extends React.Component {
           <Link to="/">Home</Link>
         </Menu.Item>
         <Menu.Item>
-          <Link to="/login">Login</Link>
-        </Menu.Item>
-        <Menu.Item>
           <Link to="/signup">Signup</Link>
         </Menu.Item>
         <Menu.Item position="right">
-          <Label as={Link} to={loggedIn ? "/account" : "/login"} color='blue' size='large'>
-            <Icon name='user' />
-            {loggedIn && 'Logged in as'}
-            <Label.Detail>{loggedInAs}</Label.Detail>
-          </Label>
+          <Button
+            as={Link}
+            to={loggedIn ? "/account" : "/login"}
+            color='blue'
+            content={loggedInAs}
+            icon='user'
+            labelPosition='left'
+            label={ loggedIn && { color: 'blue', content: 'Logged in as' }}
+          />
         </Menu.Item>
       </Menu>
     )

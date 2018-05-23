@@ -39,25 +39,29 @@ export default class Set extends React.PureComponent {
     const { reps, weight, setNumber } = this.props;
     return (
         <Grid.Row>
-          <Grid.Column width="14">
-            <Label content={'Set ' + setNumber} basic size='large' color='black' pointing='right' />
+          <Grid.Column style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem' }}>
+            <Label content={'Set ' + setNumber} size='large' color='black' />
+          </Grid.Column>
+          <Grid.Column style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem' }}>
             <Label basic size='large' color='green' pointing='right' content='Reps' />
             <Input
               color='green'
-              style={{ width: '70px' }}
+              style={{ width: '65px' }}
               size="tiny" onChange={this.handleChange}
               name="reps"
               value={reps}
             />
+          </Grid.Column>
+          <Grid.Column style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem' }}>
             <Label basic size='large' color='green' pointing='right' content='Weight' />
             <Input
-              style={{ width:"70px" }}
+              style={{ width: '65px' }}
               size="tiny" onChange={this.handleChange}
               name="weight"
               value={weight} />
           </Grid.Column>
-          <Grid.Column width="2">
-            <Icon link color='red' onClick={this.handleDeleteSet} name="delete" />
+          <Grid.Column style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem' }}>
+            <Icon link color='red' size='large' onClick={this.handleDeleteSet} name="delete" />
           </Grid.Column>
         </Grid.Row>
     )
