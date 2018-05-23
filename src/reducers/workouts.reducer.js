@@ -1,4 +1,5 @@
 import { actionTypes } from '../constants/workouts.actions';
+import { actionTypes as authActionTypes } from '../constants/auth.actions'
 
 const initialState = {
   workouts: [],
@@ -33,11 +34,11 @@ const workouts = (state = initialState, action) => {
         ...state,
         isFetching: false,
       }
-    case "LOGIN_SUCCESS":
+    case authActionTypes.LOGIN_SUCCESS:
       return {
         ...initialState,
       }
-    case "LOGOUT_SUCCESS":
+    case authActionTypes.LOGOUT_SUCCESS:
       return {
         ...initialState,
       }
